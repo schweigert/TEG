@@ -15,7 +15,7 @@ int main(void){
 
 
 	// Auxiliares
-	int i = 0, j = 0;
+	int i = 0, j = 0, g = 0;
 	int V1, V2;
 
 	scanf ("%d %d", &arestas, &vertices);
@@ -86,6 +86,17 @@ int main(void){
 			printf ("%d\t", MInc[i][j]);
 		}
 		printf ("\n");
+	}
+
+	// Grau dos vértices
+	puts ("\n \t Grau dos Vertices:");
+	for (i = 0; i < vertices; i++){
+		g = 0;
+		for (j = 0; j < vertices; j++){
+			g += MAdj[i][j];
+			g += MAdj[j][i];
+		}
+		printf ("\tv%d: %d\n", i+1,g);
 	}
 
 	return 0;
