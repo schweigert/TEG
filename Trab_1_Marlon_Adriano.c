@@ -1,102 +1,23 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "grafos.c"
 
-// Created with <3 by:
-//     - Marlon Henry Schweigert
+int main (void){
 
-int main(void){
+	int v, a, d;	
 
-	// Matrizes de Adj. e Inc.
-	int **MAdj = NULL;
-	int **MInc = NULL;
+	printf ("O grafo será direcionado? (1 - SIM, 0 - NÃO)");
+	scanf ("%d", &d);
 
-	// Número de Arestas e Vértices
-	int arestas, vertices;
+	printf ("Digite a quandidade de Vértices e Arestas:"\n);
+	scanf ("%d %d", &v,&a);
 
+	
+	Grafo* grafo = CriarGrafo(v,a,d);
 
-	// Auxiliares
-	int i = 0, j = 0, g = 0;
-	int V1, V2;
+	int j = 0;
 
-	scanf ("%d %d", &arestas, &vertices);
-
-	// Criando a matriz Adj
-	MAdj = (int**) malloc(sizeof(int*)*vertices);
-	for (i = 0; i < vertices; i++){
-		MAdj[i] = malloc(sizeof(int)*vertices);
-	}
-
-    // Zerar
-    for (i = 0; i < vertices; i++){
-        for (j = 0; j < vertices; j++){
-            MAdj[i][j] = 0;
-        }
-    }
-
-
-
-	// Criando a matriz Inc
-	MInc = (int**) malloc(sizeof(int*)*arestas);
-	for (i = 0; i < vertices; i++){
-		MInc[i] = malloc(sizeof(int)*vertices);
-	}
-
-    for (i = 0; i < arestas; i++){
-        for (j = 0; j < vertices; j++){
-            MInc[i][j] = 0;
-        }
-    }
-
-	i = arestas;
-
-	while (i--){
-		scanf ("%d %d", &V1, &V2);
-		MAdj[V1-1][V2-1]++;
-		MAdj[V2-1][V1-1]++;
-
-		MInc[i][V1]++;
-		MInc[i][V2]++;
-	}
-
-
-	// Imprimir Matriz ADJ
-	puts ("\n \tMatriz Adj:");
-    printf ("\t");
-    for (j = 0; j < vertices; j++){
-        printf ("v%d\t", j);
-    }
-    printf ("\n");
-	for (i = 0; i < vertices; i++){
-        printf ("v%d|\t", i);
-		for (j = 0; j < vertices; j++){
-			printf ("%d\t", MAdj[i][j]);
-		}
-		printf ("\n");
-	}
-
-    puts ("\n \tMatriz Inc:");
-    printf ("\t");
-    for (j = 0; j < vertices; j++){
-        printf ("v%d\t", j);
-    }
-    printf ("\n");
-	for (i = 0; i < arestas; i++){
-        printf ("u%d|\t", i);
-		for (j = 0; j < vertices; j++){
-			printf ("%d\t", MInc[i][j]);
-		}
-		printf ("\n");
-	}
-
-	// Grau dos vértices
-	puts ("\n \t Grau dos Vertices:");
-	for (i = 0; i < vertices; i++){
-		g = 0;
-		for (j = 0; j < vertices; j++){
-			g += MAdj[i][j];
-			g += MAdj[j][i];
-		}
-		printf ("\tv%d: %d\n", i+1,g);
+	for (j = 0; j < a; j++){
+		
 	}
 
 	return 0;
