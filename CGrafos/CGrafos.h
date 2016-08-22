@@ -10,4 +10,5 @@ typedef struct {
 
 Grafo* criarGrafo (int n_vertices);
 void addAresta (Grafo* grafo, int a, int b, int dir);
+void putsGrafo(Grafo* grafo);
 #endif

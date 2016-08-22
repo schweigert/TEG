@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "CGrafos.h"
 
 // cc - Marlon Henry Schweigert & Adriano Zanella - 2016
@@ -64,7 +65,16 @@ void addVertice (Grafo* grafo, int quant){
 
 void putsGrafo (Grafo* grafo){
 	
+	printf ("Matriz Adj de %p:\n", (void*)grafo);
 	
+	int i, j;
+	
+	for (i = 0; i < grafo->vertices; i++){
+		for (j = 0; j < grafo->vertices; j++){
+			printf ("%d ", grafo->matriz_adj[i][j]);
+		}
+		printf ("\n");
+	}
 	
 }
 
