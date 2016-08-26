@@ -1,0 +1,4 @@
+
+
+gcc -Wall CGrafos.c FGrafos.c CGrafos.h main.c -o out
+./out
