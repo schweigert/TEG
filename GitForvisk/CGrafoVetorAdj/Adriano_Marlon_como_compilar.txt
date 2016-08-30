@@ -1,0 +1,33 @@
+Alunos:
+		Adriano Zanella Junior
+		Marlon Henry
+
+A entrada do programa para Grafos em estrutura de vetor é composto por dois inteiro V e A, o numero de vertices e numero de arestas,
+	seguidos de A caracteres e dois inteiros no tipo "a: 1 1;", sendo que os inteiros representam dois vertices ligados por uma aresta,
+	o caractere é insignificante.
+
+	ex:
+
+3 3
+a: 1, 2;
+b: 3, 2;
+%: 2, 1;
+
+Ao ler o arquivo obtem-se de saida o queesta sendo lido, para não haver problemas.
+O resultado do grafo em estrutura de vetor adjacente é no modo:
+
+Grafo: 0x8d4a70
+	Vertices: 3
+	Arestas: 3
+	Arestas:
+	1 - 2;
+	1 - 2;
+	2 - 3;
+
+Para compilar usar:
+gcc -Wall main.c CGrafoVetorAdj.c CGrafoVetorAdj.h -o grafoVetorAdj
+
+
+A entrada do programa para grafos em estrutura de lista deve ser feita de acordo como o programa pedir.
+A compilação é
+gcc -Wall grafolista.c -o grafoLista
