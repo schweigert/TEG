@@ -1,14 +1,15 @@
-/*	TEG - Grafo por matriz de adjacencia
-*	Adriano Zanella Junior
-*	Marlon Henry
-*
-*	Esse código somente trabalha com grafos não direcionados.
-*	Para grafos direcionados precisa implementar funções adicionais.
-*/
+// cc (2016)
+// Marlon Henry Schweigert
+// Adriano Zanella Jr
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "CGrafoVetorAdj.h"
 
+/*	Função usadad para criar um grafo
+*	ao criar um grafo, cria uma matriz (n_vertices) x (n_vertices) e preenche a matriz com zeros
+*	retorna a struct do grafo criado
+*/
 Vetor* criaGrafo(int nV, int nA){
 	int i;
 	Vetor* vetor = (Vetor*)malloc(sizeof(Vetor));
@@ -26,6 +27,10 @@ Vetor* criaGrafo(int nV, int nA){
 	return vetor;
 }
 
+/*	Função para adicionar arestas não direcionadas
+*	adiciona uma aresta ligando (a) e (b) em um  grafo simples
+*	caso (a = b), tudo ocorre nrmal graças ao "if"
+*/
 void addAresta(Vetor* vetor, int a, int b){
 	int i = 0, pos_a = 0, pos_b = 0;
 
@@ -78,6 +83,9 @@ void addAresta(Vetor* vetor, int a, int b){
 	vetor->n_arestas++;
 }
 
+/*	Função cria aresta
+*	esta função cria uma struct Aresta para ser utilizada no grafo
+*/
 Arestas* criaAresta(int a){
 	Arestas* new = (Arestas*)malloc(sizeof(Arestas));
 	new->vertice = a;
@@ -87,6 +95,11 @@ Arestas* criaAresta(int a){
 	return new;
 }
 
+/*	Função usada para ler arquivo
+*	essa função pedira o nome do arquivo e ira ler as caracteristicas do grafo e criara um grafo com tais caracteristicas
+*	então ira continua lendo o arquivo e adcionara os vertices chamando as funções.
+*	essa função retorna o frago lido
+*/
 Vetor* leituraArquivo(){
 	char arquivo[50], c_aresta, direcao;
 	FILE *fp;
@@ -100,20 +113,16 @@ Vetor* leituraArquivo(){
 	fp = fopen( arquivo, "r");
 	//fp = fopen( NDIRCON, "r");
 	//fp = fopen( NDIRDESCON, "r");
-
 	if(fp == NULL){
 		printf("\nArquivo não existe\n");
 		return NULL;
 	}
-	//leitura do arquivo para vertica, direcionado e arestas
 	fscanf( fp, "%i\n", &nV);
 	printf("Vertices: %i\n", nV);
 	fscanf( fp, "%i\n", &nA);
 	printf("Arestas: %i\n", nA);
-
 	vetor = criaGrafo(nV, nA);
 	vetor->isDir = 0;
-
 	for(i = 0; (i < nA) && (feof(fp) == 0); i++) {
 		fscanf( fp, "%c: %i, %i;\n", &c_aresta, &a, &b);
 		printf("%c: %i, %i\n", c_aresta, a, b);
@@ -123,12 +132,13 @@ Vetor* leituraArquivo(){
 	return vetor;
 }
 
+/*	Função imprime grafo adjacente
+*	essa função lê o grafo e imprime na tela na forma de grafo de adjacencia
+*/
 void putsGrafo(Vetor* vetor){
 	int i, j = 0, t = 0;
 	Arestas* atual = vetor->arestas;
-
 	printf("\nGrafo: %p\n\tVertices: %i\n\tArestas: %i\n", (void*)vetor,  vetor->n_vertices, vetor->n_arestas);
-
 	for(i = 0; i < vetor->n_vertices; i++){
 		t += vetor->vertices[i];
 		while(j < t){

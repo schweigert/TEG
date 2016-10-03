@@ -1,10 +1,7 @@
-/*	TEG - Grafo por matriz de adjacencia
-*	Adriano Zanella Junior
-*	Marlon Henry
-*
-*	Esse código somente trabalha com grafos não direcionados.
-*	Para grafos direcionados precisa implementar funções adicionais.
-*/
+// cc (2016)
+// Marlon Henry Schweigert
+// Adriano Zanella Jr
+
 #ifndef __CGrafoVetorAdj__
 #define __CGrafoVetorAdj__
 

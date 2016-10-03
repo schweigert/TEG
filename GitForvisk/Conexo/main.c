@@ -11,13 +11,8 @@
 int main(void){
 	Grafo* grafo = leituraArquivo();
 	if(grafo != NULL){
-		if(direcionado(grafo)){
-			seConexoDirecionado(grafo);
-			grauNosDirecionado(grafo);
-		}else{
-			seConexo(grafo);
-			grauNos(grafo);
-		}
+		seConexo(grafo);
+		grauNos(grafo);
 		putsGrafo(grafo);
 	}
 	return 0;

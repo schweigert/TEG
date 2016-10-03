@@ -190,56 +190,6 @@ void putsGrafo (Grafo* grafo){
 	}
 }
 
-/*	Função imprime grafo incidencia
-*	essa função lê o grafo e imprime na tela na forma de grafo de incidencia
-*/
-void putsGrafoIncidencia(Grafo* grafo){
-	int matriz_inc[grafo->arestas][grafo->vertices];
-	int i, j, a, c;
-	printf("\nGrafo %p:\n\tVertices: %d\n\tArestas: %d\n", (void*)grafo,grafo->vertices,grafo->arestas);
-	for(a = 0; a < grafo->arestas; a++)
-		for(j = 0; j < grafo->vertices; j++)
-			matriz_inc[a][j] = 0;
-	a = 0;
-	if(grafo->isDir){
-		printf("\tGrafo direcionado\n");
-		for(i = 0; i < grafo->vertices; i++)
-			for(j = 0; j < grafo->vertices; j++)
-				if(grafo->matriz_adj[i][j] > 0){
-					for(c = 0; c < grafo->matriz_adj[i][j]; c++)
-						if(a < grafo->arestas){
-							matriz_inc[a][i] = 1;
-							matriz_inc[a][j] = -1;
-							a++;
-						}else{
-							printf("Erro\n");
-							exit(-1);
-						}
-				}
-	}else{
-		printf("\tGrafo não direcionado\n");
-		for(i = 0; i < grafo->vertices; i++)
-			for(j = i; j < grafo->vertices; j++)
-				if(grafo->matriz_adj[i][j] > 0){
-					for(c = 0; c < grafo->matriz_adj[i][j]; c++)
-						if(a < grafo->arestas){
-							matriz_inc[a][i] = 1;
-							matriz_inc[a][j] = 1;
-							a++;
-						}else{
-							printf("Erro\n");
-							exit(-1);
-						}
-				}	
-	}
-	for(a = 0; a < grafo->arestas; a++){
-		for(j = 0; j < grafo->vertices; j++){
-			printf(" %i", matriz_inc[a][j]);
-		}
-		printf("\n");
-	}
-}
-
 
 /*	Função usada para ler arquivo
 *	essa função pedira o nome do arquivo e ira ler as caracteristicas do grafo e criara um grafo com tais caracteristicas

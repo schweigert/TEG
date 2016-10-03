@@ -32,7 +32,6 @@ Grafo* addVerticeDirecional(Grafo* grafo, int quant);
 Grafo* RemoveVerticeDirecional(Grafo* grafo, int a);
 
 void putsGrafo(Grafo* grafo);
-void putsGrafoIncidencia(Grafo* grafo);
 
 void seConexoDirecionado(Grafo* grafo);
 void seConexo(Grafo* grafo);

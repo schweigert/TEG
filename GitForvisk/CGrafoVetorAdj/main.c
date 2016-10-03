@@ -1,12 +1,9 @@
+// cc (2016)
+// Marlon Henry Schweigert
+// Adriano Zanella Jr
+
 /*
 	gcc -Wall main.c CGrafoVetorAdj.c CGrafoVetorAdj.h -o grafoVetorAdj
-*/
-/*	TEG - Grafo por matriz de adjacencia
-*	Adriano Zanella Junior
-*	Marlon Henry
-*
-*	Esse código somente trabalha com grafos não direcionados.
-*	Para grafos direcionados precisa implementar funções adicionais.
 */
 #include <stdio.h>
 #include "CGrafoVetorAdj.h"
