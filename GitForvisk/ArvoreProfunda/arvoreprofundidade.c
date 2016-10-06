@@ -75,6 +75,9 @@ int main (void){
 	grafo = malloc(sizeof(int*)*v);
 	for (i = 0; i < v; i++){
 		grafo[i] = malloc(sizeof(int)*v);
+		for (j = 0; j < v; j++){
+			grafo[i][j] = 0;
+		}
 	}
 	j = a;
 	while(j--){
@@ -82,7 +85,7 @@ int main (void){
 		grafo[a][b] = 1;
 		grafo[b][a] = 1;
 	}
-	
+
 	int inicio = 0;
 	scanf("%d", &inicio);
 	int* flag = malloc(sizeof(int)*v);

@@ -1,0 +1,145 @@
+C:\Users\Maria\Desktop>gcc -Wall -o bla arvoreprofundidade.c
+
+C:\Users\Maria\Desktop>bla
+Acesso negado.
+
+C:\Users\Maria\Desktop>bla
+11 17
+0 2
+0 3
+2 3
+2 8
+3 8
+2 1
+8 1
+8 10
+1 4
+10 4
+10 7
+4 9
+4 5
+5 9
+5 6
+9 6
+7 4
+0
+Analisando 0
+Gerando ramo de 0 para 1
+Analisando 1
+Gerando ramo de 1 para 2
+Analisando 2
+Gerando ramo de 2 para 3
+Analisando 3
+Gerando ramo de 3 para 5
+Analisando 5
+Gerando ramo de 5 para 4
+Analisando 4
+Gerando ramo de 4 para 7
+Analisando 7
+Gerando ramo de 7 para 6
+Analisando 6
+Gerando ramo de 6 para 8
+Analisando 8
+Gerando ramo de 8 para 9
+Analisando 9
+Gerando ramo de 9 para 10
+Analisando 10
+0(1):
+  1(1):
+    2(1):
+      3(1):
+        5(1):
+          4(1):
+            7(1):
+              6(1):
+                8(1):
+                  9(1):
+                    10(0):
+Buscando Ansc:
+1
+1(1):
+  2(1):
+    3(1):
+      5(1):
+        4(1):
+          7(1):
+            6(1):
+              8(1):
+                9(1):
+                  10(0):
+Ansc:
+0
+Buscando Ansc:
+2
+2(1):
+  3(1):
+    5(1):
+      4(1):
+        7(1):
+          6(1):
+            8(1):
+              9(1):
+                10(0):
+Ansc:
+1
+0
+Buscando Ansc:
+3
+3(1):
+  5(1):
+    4(1):
+      7(1):
+        6(1):
+          8(1):
+            9(1):
+              10(0):
+Ansc:
+2
+1
+0
+Buscando Ansc:
+4
+4(1):
+  7(1):
+    6(1):
+      8(1):
+        9(1):
+          10(0):
+Ansc:
+5
+3
+2
+1
+0
+Buscando Ansc:
+5
+5(1):
+  4(1):
+    7(1):
+      6(1):
+        8(1):
+          9(1):
+            10(0):
+Ansc:
+3
+2
+1
+0
+Buscando Ansc:
+6
+6(1):
+  8(1):
+    9(1):
+      10(0):
+Ansc:
+7
+4
+5
+3
+2
+1
+0
+Buscando Ansc:
+-1
+
+C:\Users\Maria\Desktop>
