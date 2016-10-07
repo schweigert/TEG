@@ -45,6 +45,27 @@ void imprimeArvore(struct no* arv, int nivel){
 	}
 }
 
+int imprimeArvoreApartirDe(struct no* arv, int v){
+
+	if (arv->camp == v){
+		imprimeArvore(arv, 0);
+		puts("Ansc:");
+		return 1;	
+	} else {
+		int i = 0;
+		int b;
+		for( ; i < arv->size; i++){
+			b = imprimeArvoreApartirDe(arv->nos[i], v);
+			if (b == 1) {
+				printf("%d\n", arv->camp);
+				return 1;
+			}
+		}
+	}
+	return 0;
+
+}
+
 int main (void){
 
 	int** grafo= NULL;
@@ -69,5 +90,13 @@ int main (void){
 	puts("2");
 	struct no* arv = ArvoreProfundidade(grafo, flag, v, inicio);
 	imprimeArvore(arv, 0);
+
+	int opt = 0;
+	int res = 1;
+	while(res){
+		puts("Buscando Ansc:");
+		scanf("%d", &opt);
+		res = imprimeArvoreApartirDe(arv, opt);
+	}
 	return 0;
 }
