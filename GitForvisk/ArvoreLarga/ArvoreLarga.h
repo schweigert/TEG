@@ -2,10 +2,12 @@
 // Marlon Henry Schweigert
 // Adriano Zanella Jr
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "CGrafos.h"
 
-#ifndef __ArvoreProfunda__
-#define __ArvoreProfunda__
+#ifndef __ArvoreLarga__
+#define __ArvoreLarga__
 
 #define MARCA 1
 #define SEMMARCA 0
@@ -38,8 +40,8 @@ typedef struct {
 /*	Funções de Criação	*/
 Arvore* criarArvore();
 Vertice* criarVerticeArvore(int nome);
-void addPrimeiroVerticeArvore(Vertice* vertice, Arvore* arvore);
-void addVerticeArvore(Vertice* novoVertice, Vertice* pai, Arvore* arvore);
+void addPrimeiroVerticeArvore(Vertice* novoVertice, Arvore* arvore);
+void addVerticeArvore(Vertice* novoVertice, Vertice* verticePai, Arvore* arvore);
 
 /*	Funções de busca	*/
 Vertice* buscaVerticeArvore(int nome, Arvore* arvore);
@@ -48,9 +50,18 @@ Vertice* buscaVerticeFilhoArvore(int nome, Vertice* verticePai);
 /*	Funções de Leitura de Grafo	*/
 Arvore* criarArvoreLargura( int verticeInicial, Grafo* grafo);
 
+
+
 /*	Funções de Impressao	*/
 void putsArvore(Arvore* arvore);
 void putsFilhos(Vertice* verticePai);
+void putsDescendentes(int nome, Arvore* arvore);
+void putsDescendentesRecursao(Vertice* verticePai);
+void putsAscendentes(int nome, Arvore *arvore);
+void putsAscendentesRecursao(Vertice* verticeFilho);
+
+int pedeVerticeInicial();
+int pedeVerticeDesejado();
 
 /*	Função de Teste 	*/
 Arvore* testeArvore();

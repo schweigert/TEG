@@ -21,8 +21,8 @@ Arvore* criarArvore(){
 	return new;
 }
 
-void addPrimeiroVerticeArvore(Vertice* vertice, Arvore* arvore){
-	arvore->inicio = vertice;
+void addPrimeiroVerticeArvore(Vertice* novoVertice, Arvore* arvore){
+	arvore->inicio = novoVertice;
 	arvore->n_vertices++;
 }
 
@@ -36,18 +36,18 @@ Vertice* criarVerticeArvore(int nome){
 	return new;
 }
 
-void addVerticeArvore(Vertice* verticePai, Vertice* verticeFilho, Arvore* arvore){
+void addVerticeArvore(Vertice* novoVertice, Vertice* verticePai, Arvore* arvore){
 
 	ListaV* novaSeccao = (ListaV*)malloc(sizeof(ListaV));
-	novaSeccao->vertice = verticeFilho;
-	verticeFilho->pai = verticePai;
+	novaSeccao->vertice = novoVertice;
+	novoVertice->pai = verticePai;
 	novaSeccao->proximo = NULL;
 
 	if(verticePai->filho == NULL){
 		verticePai->filho = novaSeccao;
-		//printf("primeirofilho %i %i\n",verticePai->nome, verticeFilho->nome);
+		//printf("primeirofilho %i %i\n",verticePai->nome, novoVertice->nome);
 	}else{
-		//printf("novo filho %i %i\n",verticePai->nome, verticeFilho->nome);
+		//printf("novo filho %i %i\n",verticePai->nome, novoVertice->nome);
 		ListaV* listaAux = verticePai->filho;
 		while(listaAux->proximo != NULL){
 			//printf("Proximo\n");
@@ -145,24 +145,32 @@ Arvore* criarArvoreLargura( int verticeInicial, Grafo* grafo){
 
 
 		verticeVisitado[verticeInicial] = 1;
+		addPrimeiroVerticeArvore( criarVerticeArvore(verticeInicial), arvore);
 		int leave = 1;
 		int i;
 		do{
-			if(verticeVisitado[i] == 1){
-				Vertice* verticePai = buscaVerticeArvore(i,);
-
-				for(int j = 0; j < grafo->vertices; j++){
-					if((grafo->matriz_adj[i][j] > 0) && (i != j)){
-						verticeVisitado[j] = 1;
-						Vertice* verticeFilho = criarVerticeArvore(j, arvore);
+			leave = 1;
+			i = 0;
+			do{
+				if(verticeVisitado[i] == 1){
+					//printf("\nBuscando %i\n", i);
+					Vertice* verticePai = buscaVerticeArvore(i, arvore);
+					//printf("\nAdicioando vertices filhos de %i: ", i);
+					for(int j = 0; j < grafo->vertices; j++){
+						if((grafo->matriz_adj[i][j] > 0) && (i != j) && (verticeVisitado[j] == 0)){
+							//printf(" %i ", j);
+							Vertice* verticeFilho = criarVerticeArvore(j);
+							addVerticeArvore(verticeFilho, verticePai, arvore);
+							//printf(" %i ok", j);
+							verticeVisitado[j] = 1;
+						}
 					}
+					//putsArvore(arvore);
+					verticeVisitado[i]++;
+					leave = 0;
 				}
-				leave = 0;
-			}
 			i++;
-			if(i >= grafo->vertices){
-				i = 0;
-			}
+			}while(i < grafo->vertices);
 		}while(!leave);
 
 		return arvore;
@@ -192,14 +200,14 @@ void putsArvore(Arvore* arvore){
 
 void putsFilhos(Vertice* verticePai){
 	if(verticePai->filho != NULL){
-		printf("\nFilhos de %i:  ", verticePai->nome);
+		printf("\nFilhos de %i:  ", verticePai->nome + 1);
 
 		ListaV* listaAux = verticePai->filho;
 		int leave = 0;
 		do{
 			leave = 0;
 			Vertice* verticeFilho = listaAux->vertice;
-			printf("%i", verticeFilho->nome);
+			printf("%i", verticeFilho->nome + 1);
 			if(listaAux->proximo != NULL){
 				printf("  ");
 			}else{
@@ -220,8 +228,77 @@ void putsFilhos(Vertice* verticePai){
 			listaAux = listaAux->proximo;
 		}while(!leave);
 	}else{
-		printf("\nVertice %i sem filhos.", verticePai->nome);
+		printf("\nVertice %i sem filhos.", verticePai->nome + 1);
 	}
+}
+
+
+void putsDescendentes(int nome, Arvore* arvore){
+	Vertice* verticePai = buscaVerticeArvore(nome, arvore);
+	printf("Descendentes de %i: ", verticePai->nome + 1);
+	putsDescendentesRecursao(verticePai);
+	printf("\n");
+}
+
+void putsDescendentesRecursao(Vertice* verticePai){
+	if(verticePai->filho != NULL){
+		ListaV* listaAux = verticePai->filho;
+		int leave = 0;
+		do{
+			leave = 0;
+			Vertice* verticeFilho = listaAux->vertice;
+			printf("%i ", verticeFilho->nome + 1);
+			if(listaAux->proximo == NULL){
+				leave = 1;
+			}
+			listaAux = listaAux->proximo;
+		}while(!leave);
+
+		listaAux = verticePai->filho;
+		do{
+			leave = 0;
+			putsDescendentesRecursao(listaAux->vertice);
+				printf("  ");
+			if(listaAux->proximo == NULL){
+				leave = 1;
+			}
+			listaAux = listaAux->proximo;
+		}while(!leave);
+	}
+}
+
+void putsAscendentes(int nome, Arvore *arvore){
+	Vertice* verticeInicial = buscaVerticeArvore(nome, arvore);
+	if(verticeInicial->pai == NULL){
+		printf("Vertice raiz da arvore, sem ancestrais\n");
+	}else{
+		printf("Ancestrais de %i: ", verticeInicial->nome + 1);
+		putsAscendentesRecursao(verticeInicial);
+	}
+}
+
+void putsAscendentesRecursao(Vertice* verticeFilho){
+	Vertice* verticePai = verticeFilho->pai;
+	printf("%i ", verticePai->nome + 1);
+	if(verticePai->pai != NULL){
+		putsAscendentesRecursao(verticePai);
+	}else{
+		printf(".\n");
+	}
+}
+
+int pedeVerticeInicial(){
+	int escolha = 0;
+	printf("\tRaiz da arvore: ");
+	scanf("%i", &escolha);
+	return (escolha - 1);
+}
+
+int pedeVerticeDesejado(){
+	int escolha = 0;
+	printf("\n\tEscolha o vertice:");
+	scanf("%i", &escolha);
+	return (escolha - 1);
 }
 
 

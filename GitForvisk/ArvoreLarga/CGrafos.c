@@ -241,6 +241,75 @@ Grafo* leituraArquivo(){
 	return grafo;
 }
 
+Grafo* leituraTeclado(){
+	int n_vertices, n_arestas;
+	int v1, v2;//, custo;
+	int direcionado = -1;
+	int i;
+	Grafo* grafo;
+
+	printf( "Inicindo inserção de dados!\n");
+	while( direcionado == -1){
+		char esc = 'a';
+		printf( "O grafo é direcionado [Y/n]:");
+		scanf( "%c", &esc);
+		if( esc == 'Y'){
+			direcionado = 1;
+			printf(" Criando grafo direcionado!");
+		}else if( esc == 'n'){
+			direcionado = 0;
+			printf( " Criando grafo não direcionado");
+		}else
+			printf( " Escolha invalida! %c", esc);
+	}
+	printf( "\nNumero de vertices: ");
+	scanf( "%i", &n_vertices);
+	printf( "\nNumero de arestas: ");
+	scanf( "%i", &n_arestas);
+	grafo = criarGrafo( n_vertices);
+	putsGrafo(grafo);
+	printf("Modelo de entrada de vertice:\nV1 V2\n");
+	if(direcionado){
+		grafo->isDir = 1;
+		for( i = 0; i < n_arestas; i++){
+			int ok = 0;
+			while( !ok){
+				scanf( "%i%i", &v1, &v2);
+				if( ( v1 <= n_vertices) && ( v2 <= n_vertices) && ( v1 > 0) && ( v2 > 0)){
+					addArestaDirecionado( grafo, --v1, --v2);
+					printf("Aresta inserida: %i %i\n", v1+1, v2+1);
+					ok = 1;
+				}else{
+					printf("Aresta invalido!\n");
+					ok = 0;
+				}
+			}
+		}
+	}
+	else if(!direcionado){
+		grafo->isDir = 0;
+		for ( i = 0; i < n_arestas; ++i){
+			int ok = 0;
+			while( !ok){
+				scanf( "%i%i", &v1, &v2);
+				if( ( v1 <= n_vertices) && ( v2 <= n_vertices) && ( v1 > 0) && ( v2 > 0)){
+					addAresta( grafo, --v1, --v2);
+					printf("Aresta inserida: %i %i\n", v1+1, v2+1);
+					ok = 1;
+				}else{
+					printf("Aresta invalido!\n");
+					ok = 0;
+				}
+			}
+		}
+	}
+	else{
+		printf("Erro\n");
+		return NULL;
+	}
+	return grafo;
+}
+
 /*
 *
 */

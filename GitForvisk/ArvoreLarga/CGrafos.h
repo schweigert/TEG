@@ -2,13 +2,17 @@
 // Marlon Henry Schweigert
 // Adriano Zanella Jr
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #ifndef __CGrafos__
 #define __CGrafos__
 
-#define NDIRCON "NotDirConexo.txt"
-#define NDIRDESCON "NotDirDesconexo.txt"
-#define DIRCON "DirConexo.txt"
-#define DIRDESCON "DirDesconexo.txt"
+#define GRAFO1 "grafo1.txt"
+#define GRAFO2 "grafo2.txt"
+#define GRAFO3 "grafo3.txt"
+#define GRAFO4 "grafo4.txt"
+#define GRAFO5 "grafo5.txt"
 
 typedef struct {
 	int** matriz_adj;
@@ -19,6 +23,7 @@ typedef struct {
 
 Grafo* criarGrafo(int n_vertices);
 Grafo* leituraArquivo();
+Grafo* leituraTeclado();
 
 void addAresta(Grafo* grafo, int a, int b);
 void addArestaDirecionado(Grafo* grafo, int a, int b);
