@@ -1,6 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void printMenorCaminho(int v1, int v2, int** r){
+	printf("%d ", v2);
+	if(v1 == v2){
+		return;
+	}
+	printMenorCaminho(v1,r[v2][0], r);
+}
+
+int removeMenorCaminho(int v1, int v2, int** grafo, int v, int distMaxima, int d){
+	int i;
+	if(v1 == v2) return 1;
+	if(distMaxima <= d) return 0;
+	int resp = 0;
+	for(i = 0; i < v; i++){
+		if(grafo[v1][i] == 0) continue;
+		int r = removeMenorCaminho(i, v2, grafo, v, distMaxima, d+grafo[v1][i]);
+		if(r == 1){
+			resp = 1;
+			printf("Removendo %d para %d com custo %d\n", v1, i, grafo[v1][i]);
+			grafo[v1][i] = 0;
+		}
+	}
+
+	return resp;
+}
+
 int encontraMenorMarcado(int** r, int v){
 	int i;
 	int resp = -1, custo = -1;
@@ -149,6 +175,26 @@ int main(void){
 			printf("%d ", respDijkstra[i][j]);
 		}
 		printf("\n");
+	}
+
+	// Remover Caminhos
+	removeMenorCaminho(v1, v2, grafo, v, respDijkstra[v2][1], 0);
+
+	printf("\n\tGrafo final:\n");
+
+	printGrafo(grafo, v);
+
+	printf("\n\n");
+
+	respDijkstra = dijkstra(grafo, v, v1);
+
+	if(respDijkstra[v2][2]==2){
+		printf("Distância pelo caminho secundário: %d\n", respDijkstra[v2][1]);
+		printf("\tCaminho de %d para %d:\n", v1, v2);
+		printMenorCaminho(v1, v2, respDijkstra);
+		printf("\n\n");
+	}else{
+		printf("%d não tem um caminho secundário\n\n",v2);
 	}
 
 	return 0;
