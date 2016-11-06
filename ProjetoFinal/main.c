@@ -58,6 +58,8 @@ int** dijkstra(int** grafo, int v, int s){
 		// 1 = Alcançado
 		// 2 = Relaxado
 	}
+
+	// Primeiro Vértice
 	printf("Inicializando startup\n");
 	r[s][0] = s; // Dele mesmo
 	r[s][1] = 0; // Custo zero
@@ -73,6 +75,7 @@ int** dijkstra(int** grafo, int v, int s){
 		r[i][2] = 1;
 	}
 
+	// Próximos Vértices
 	while(1){
 		printf("\n\nTabela Dijkstra Parcial:\n");
 		for(i = 0; i < v; i++){
@@ -147,10 +150,12 @@ int main(void){
 		}
 	}
 
+	// Imprimindo o grafo
 	printf("\n\tGrafo:\n\n");
 
 	printGrafo(grafo, v);
 
+	// Leitura de Aresta Peso Aresta
 	printf("\n\t A P A\n");
 	for(i = 0; i < a; i++){
 		printf("%d\t",i);
@@ -158,15 +163,17 @@ int main(void){
 		grafo[v1][v2] = p;
 	}
 
+	// Imprimindo Grafo
 	printf("\n\tGrafo:\n\n");
 
 	printGrafo(grafo, v);
 
+	// Leitura ponto inicial e final
 	printf("\nI F\n");
 	scanf("%d %d", &v1, &v2);
 
+	// Calculando menor caminho e imprimindo tabela
 	printf("\tDijkstra:\n\n");
-
 	int** respDijkstra = dijkstra(grafo, v, v1);
 
 	printf ("Fim Dijkstra:\n");
@@ -179,15 +186,14 @@ int main(void){
 
 	// Remover Caminhos
 	removeMenorCaminho(v1, v2, grafo, v, respDijkstra[v2][1], 0);
-
 	printf("\n\tGrafo final:\n");
-
 	printGrafo(grafo, v);
-
 	printf("\n\n");
 
+	// Calculando segundo menor caminho
 	respDijkstra = dijkstra(grafo, v, v1);
 
+	// Resposta Final
 	if(respDijkstra[v2][2]==2){
 		printf("Distância pelo caminho secundário: %d\n", respDijkstra[v2][1]);
 		printf("\tCaminho de %d para %d:\n", v1, v2);
